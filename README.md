@@ -7,8 +7,8 @@ View it live:
 This Webapp allows users to buy items, add items to cart, remove items from cart, and download the items after purchase.
 Admins can create listings, edit listings, manage orders, manage users, and manage admins.
 
-## User Guide:
-### Browse Categories:
+## User Guide
+### Browse Categories
 Select available category
 
 ![Browse categories](github-images/gifs/1_browse_categories.gif)
@@ -38,18 +38,18 @@ You can update profile details by clicking on profile name -> Profile -> Update
 
 ![Update profile](github-images/gifs/6_update_profile.gif)
 
-## Admin Guide:
-### Open admin panel:
+## Admin Guide
+### Open admin panel
 Open admin panel by logging in with admin account and clicking on profile name -> Admin panel
 
 ![Open admin panel](github-images/gifs/7_open_admin_panel.gif)
 
-### Perform admin actions:
+### Perform admin actions
 Click available action to perform an action
 
 ![Admin actions](github-images/gifs/8_admin_panel.gif)
 
-## Tech Stack:
+## Tech Stack
 ### Frontend
 - HTML
 - CSS

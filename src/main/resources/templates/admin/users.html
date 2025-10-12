@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Users Panel -->
+
+    <div class="container-fluid mt-3">
+        <a href="/admin/"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+
+    <div class="container-fluid mt-3 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">User Details</h3>
+
+                        <!-- Session Message -->
+
+                        <th:block th:if="${session.message}">
+                            <div class="alert alert-success text-center" role="alert">[[${session.message}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                        <th:block th:if="${session.error}">
+                            <div class="alert alert-danger text-center" role="alert">[[${session.error}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Address</th>
+                                <th>Roles</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr th:each="user: ${users}">
+                                <td>[[${user.id}]]</td>
+                                <td>[[${user.name}]]</td>
+                                <td>[[${user.email}]]</td>
+                                <td>[[${user.mobile}]]</td>
+                                <td>
+                                    <p>[[${user.address}]]<p>
+                                    <p>City: [[${user.city}]]<p>
+                                    <p>State: [[${user.state}]]<p>
+                                    <p>Pincode: [[${user.pincode}]]<p>
+                                </td>
+                                <td>[[${user.role}]]</td>
+                                <td>
+                                    <span class="badge" th:classappend="${user.enabled} ? 'text-bg-success' : 'text-bg-danger' ">[[${user.enabled ? 'Active' : 'Disabled'}]]</span>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/admin/user/update_status?id=' + ${user.id} + '&status=true'}" class="btn btn-sm btn-outline-success" th:classappend="${user.enabled} ? 'disabled' : '' ">Active</a>
+                                    <a th:href="@{'/admin/user/update_status?id=' + ${user.id} + '&status=false'}" class="btn btn-sm btn-outline-danger" th:classappend="${user.enabled} ? '' : 'disabled' ">Disable</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+
+                <div class="row mt-3">
+                    <div class="col-12 col-md-4 mb-3">Total Users: [[${totalElements}]]</div>
+                    <div class="col-12 col-md-8">
+                        <th:block th:if="${usersSize > 0}">
+                            <nav>
+                                <ul class="pagination">
+
+                                    <li class="page-item">
+                                        <a class="page-link" th:href="@{'/admin/users?page=' + ${pageNumber-1}}"
+                                           th:classappend="${isFirst} ? 'disabled' : '' ">Previous</a>
+                                    </li>
+
+                                    <li th:each="i: ${#numbers.sequence(1, totalPages)}" class="page-item"
+                                        th:classappend="${pageNumber+1==i ? 'active' : ''}">
+                                        <a class="page-link" th:href="@{'/admin/users?page=' + ${i-1}}">[[${i}]]</a>
+                                    </li>
+
+                                    <li class="page-item">
+                                        <a class="page-link" th:href="@{'/admin/users?page=' + ${pageNumber+1}}"
+                                           th:classappend="${isLast} ? 'disabled' : '' ">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </th:block>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Model</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Model Details Page -->
+
+    <div class="container mb-5">
+        <div class="row mt-5">
+            <div class="col-md-12 text-center">
+
+                <!-- Session Message -->
+
+                <th:block th:if="${session.message}">
+                    <p class="alert alert-success" role="alert">[[${session.message}]]</p>
+                    <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                </th:block>
+
+                <th:block th:if="${session.error}">
+                    <p class="alert alert-danger" role="alert">[[${session.error}]]</p>
+                    <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                </th:block>
+
+                <div class="row">
+
+                    <!-- Left Side -->
+
+                    <div class="col-10 col-md-10 col-lg-6 offset-1 offset-md-1 offset-lg-0 border rounded p-3 mt-5">
+                        <img class="img-fluid" th:src="${asset.imageName}"
+                             th:alt="${asset.title}">
+                    </div>
+
+                    <!-- Right Side -->
+
+                    <div class="bg-light col-10 col-md-10 col-lg-4 offset-1 offset-md-1 offset-lg-1 rounded p-4 mt-5">
+                        <div class="text-start mb-3">
+                            <h4 class="h4">[[${asset.title}]]</h4>
+                        </div>
+                        <hr>
+                        <div class="text-start mb-3">
+                            <h2 class="h2">₹[[${asset.price}]]</h2>
+                        </div>
+                        <div class="text-start">
+                            <h5 class="h5">About this model</h5>
+                            <p>[[${asset.description}]]</p>
+                        </div>
+                        <div class="text-start">
+                            <h5 class="h5">Model details</h5>
+                            <p>Category: [[${asset.category}]]</p>
+                            <p>Refundable: Non-Refundable</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <i class="fa-solid fa-credit-card text-secondary"></i>
+                                <p>Credit Cards Accepted</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="fa-solid fa-lock text-success"></i>
+                                <p>Secure Payments</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="fa-solid fa-file-arrow-down text-primary"></i>
+                                <p>Instant Download</p>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <th:block th:if="${user != null and alreadyPurchased == 'false'}">
+
+<!--                                <th:block th:if="${user.role=='ROLE_ADMIN'}">-->
+<!--                                    <a class="btn btn-dark disabled" th:href="@{'/user/addCart?aid='+ ${asset.id} + '&uid=' + ${user.id}}">Add to Cart</a>-->
+<!--                                </th:block>-->
+                                <th:block th:if="${user.role=='ROLE_USER'}">
+                                    <a class="btn btn-dark" th:href="@{'/user/addCart?aid='+ ${asset.id} + '&uid=' + ${user.id}}">Add to Cart</a>
+                                </th:block>
+                            </th:block>
+
+                            <th:block th:if="${user != null and alreadyPurchased == 'true'}">
+<!--                                <th:block th:if="${user.role=='ROLE_ADMIN'}">-->
+<!--                                    <a class="btn btn-success disabled" href="#">Download</a>-->
+<!--                                </th:block>-->
+                                <th:block th:if="${user.role=='ROLE_USER'}">
+                                    <a class="btn btn-success" th:href="${asset.fileName}">Download</a>
+                                </th:block>
+                            </th:block>
+
+                            <th:block th:unless="${user != null}">
+                                <a class="btn btn-primary" href="/signin">Login to Buy</a>
+                            </th:block>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

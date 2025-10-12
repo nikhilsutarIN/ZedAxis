@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>View Models</title>
+</head>
+<body>
+
+<section>
+
+    <!-- View Models Panel -->
+
+    <div class="container-fluid mt-3">
+        <a href="/admin/"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+
+    <div class="container-fluid mt-3 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">View Models</h3>
+
+                        <!-- Session Message -->
+
+                        <th:block th:if="${session.message}">
+                            <div class="alert alert-success text-center" role="alert">[[${session.message}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                        <th:block th:if="${session.error}">
+                            <div class="alert alert-danger text-center" role="alert">[[${session.error}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                    </div>
+                    <div class="card-body table-responsive">
+
+                        <!-- Search -->
+
+                        <form action="/admin/view_models" method="get">
+                            <div class="row mb-5 text-center">
+                                <div class="col-md-11 mb-3">
+                                    <input type="search" name="query" class="form-control" placeholder="Search Model...">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="submit" class="form-control btn btn-primary" value="Search">
+                                </div>
+                            </div>
+                        </form>
+
+                        <hr>
+
+                        <table class="table table-sm">
+                            <tr>
+                                <th scope="col" class="col-1">Image</th>
+                                <th scope="col" class="col-1">Title</th>
+                                <th scope="col" class="col-1">Active</th>
+                                <th scope="col" class="col-1">Description</th>
+                                <th scope="col" class="col-1">Category</th>
+                                <th scope="col" class="col-1">Price</th>
+                                <th scope="col" class="col-1">Model File Name</th>
+                                <th scope="col" class="col-1">Actions</th>
+                            </tr>
+
+                            <th:block th:if="${assetsSize > 0}">
+
+                                <tr th:each="model: ${assets}">
+                                    <td><img th:src="${model.imageName}" width="50px" height="50px"></td>
+                                    <td>[[${model.title}]]</td>
+                                    <td><span class="badge" th:classappend="${model.active} ? 'text-bg-success' : 'text-bg-danger' ">[[${model.active}]]</span></td>
+                                    <td>[[${model.description}]]</td>
+                                    <td>[[${model.category}]]</td>
+                                    <td>[[${model.price}]]</td>
+                                    <td>[[${model.fileName}]]</td>
+                                    <td>
+                                        <a th:href="@{'/admin/edit_model/'+${model.id}}" class="btn btn-sm btn-outline-dark">Edit</a>
+                                        <a th:href="@{'/admin/delete_model/'+${model.id}}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    </td>
+                                </tr>
+
+                            </th:block>
+
+                            <th:block th:unless="${assetsSize > 0}">
+                                <tr class="mt-3">
+                                    <td class="text-center" colspan="8">
+                                        <h5>No Model Available</h5>
+                                    </td>
+                                </tr>
+                            </th:block>
+
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+
+                <div class="row mt-3">
+                    <div class="col-12 col-md-4 mb-3">Total Models: [[${totalElements}]]</div>
+                    <div class="col-12 col-md-8">
+                        <th:block th:if="${assetsSize > 0}">
+                            <nav>
+                                <ul class="pagination">
+
+                                    <li class="page-item">
+                                        <a class="page-link" th:href="@{'/admin/view_models?page=' + ${pageNumber-1}}"
+                                           th:classappend="${isFirst} ? 'disabled' : '' ">Previous</a>
+                                    </li>
+
+                                    <li th:each="i: ${#numbers.sequence(1, totalPages)}" class="page-item"
+                                        th:classappend="${pageNumber+1==i ? 'active' : ''}">
+                                        <a class="page-link" th:href="@{'/admin/view_models?page=' + ${i-1}}">[[${i}]]</a>
+                                    </li>
+
+                                    <li class="page-item">
+                                        <a class="page-link" th:href="@{'/admin/view_models?page=' + ${pageNumber+1}}"
+                                           th:classappend="${isLast} ? 'disabled' : '' ">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </th:block>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

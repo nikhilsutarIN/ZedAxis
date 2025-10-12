@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Order Page -->
+
+    <div class="container-fluid mt-3">
+        <a href="/user/cart"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+
+    <div class="container mt-3">
+        <form action="/user/orders" method="post">
+            <div class="row">
+
+                <!-- Left Side Address -->
+
+                <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-0 mb-3">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h3 class="card-title">Billing Address</h3>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="mb-4">
+                                <h5 class="h5">Contact Details:</h5>
+                                <p>Name: [[${user.name}]]</p>
+                                <p>Email: [[${user.email}]]</p>
+                                <p>Mobile: [[${user.mobile}]]</p>
+
+                                <!-- Hidden fields to pass user data -->
+                                <input type="hidden" name="email" th:value="${user.email}" />
+
+                            </div>
+
+                            <div>
+                                <h5 class="h5">Your Address:</h5>
+                                <p>[[${user.address}]]</p>
+                                <p>City: [[${user.city}]]</p>
+                                <p>State: [[${user.state}]]</p>
+                                <p>Pincode: [[${user.pincode}]]</p>
+
+                            </div>
+
+                            <a class="btn btn-sm btn-dark" href="/user/updateUser">Update</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side Checkout -->
+
+                <div class="col-md-10 col-lg-4 offset-md-1 offset-lg-0">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title text-center">Checkout</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="h5">Total models:</h5>
+                            <p>[[${cartCount}]]</p>
+                            <h5 class="h5 mb-3">Total Price: ₹ [[${totalPrice}]] </h5>
+                            <p class="text-center"><i class="fa-solid fa-lock"></i> Secure Transaction</p>
+                            <input type="hidden" name="paymentType" value="ONLINE" />
+                            <button class="form-control btn btn-warning" type="submit">Make Payment</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</section>
+
+</body>
+</html>

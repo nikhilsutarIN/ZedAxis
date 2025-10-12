@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>View Cart</title>
+</head>
+<body>
+
+<section>
+
+    <!-- View Cart -->
+
+    <div class="container-fluid mt-3">
+        <a href="/"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+
+    <div class="container-fluid mt-3 mb-5">
+        <div class="row">
+
+            <!-- Left Side Cart -->
+
+            <div class="col-md-10 col-lg-8 offset-md-1 offset-lg-0 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">Cart</h3>
+
+                        <!-- Session Message -->
+
+                        <th:block th:if="${session.message}">
+                            <div class="alert alert-success text-center" role="alert">[[${session.message}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                            <!-- Bean name should start in lowercase -->
+                        </th:block>
+
+                        <th:block th:if="${session.error}">
+                            <div class="alert alert-danger text-center" role="alert">[[${session.error}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tr>
+                                <th>Image</th>
+                                <th>Model Name</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr th:each="cart: ${cartList}">
+                                <td><img th:src="${cart.asset.imageName}" width="50px" height="50px"></td>
+                                <td><a th:href="@{'/models/' + ${cart.asset.id}}">[[${cart.asset.title}]]</a></td>
+                                <td>₹ [[${cart.asset.price}]]</td>
+                                <td>
+                                    <a th:href="@{'/user/cart/delete/' + ${cart.asset.id}}" class="btn btn-sm btn-light">
+                                        <i class="fa-solid fa-xmark"></i> Remove
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="2"></th>
+                                <th>Total Price:</th>
+                                <th>₹ [[${totalPrice}]]</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side Checkout -->
+
+            <div class="col-md-10 col-lg-4 offset-md-1 offset-lg-0">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">Checkout</h3>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="h5">Total models:</h5>
+                        <p>[[${cartCount}]]</p>
+                        <h5 class="h5 mb-3">Total Price: ₹ [[${totalPrice}]] </h5>
+                        <p class="text-center"><i class="fa-solid fa-lock"></i> Secure Transaction</p>
+
+                        <th:block th:if="${cartCount > 0}">
+                            <a class="form-control btn btn-warning" href="/user/orders">Proceed to Buy</a>
+                        </th:block>
+
+                        <th:block th:if="${cartCount <= 0}">
+                            <a class="form-control btn btn-warning disabled" href="/user/orders">Proceed to Buy</a>
+                        </th:block>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+
+</body>
+</html>

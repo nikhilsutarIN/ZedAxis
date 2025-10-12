@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Profile Page -->
+
+    <div class="container-fluid mt-3">
+        <a href="/"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+
+    <div class="container mt-3">
+        <div class="row">
+
+            <!-- User Details -->
+
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3 class="card-title">Profile</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Name: [[${user.name}]]</p>
+                        <p>Email: [[${user.email}]]</p>
+                        <p>Mobile: [[${user.mobile}]]</p>
+
+                        <h5 class="h5">Your Address:</h5>
+                        <p>[[${user.address}]]<p>
+                        <p>City: [[${user.city}]]<p>
+                        <p>State: [[${newState}]]<p>
+                        <p>Pincode: [[${user.pincode}]]<p>
+
+                        <a class="btn btn-sm btn-dark" href="/user/updateUser">Update</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

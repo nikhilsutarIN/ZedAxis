@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Admin Panel -->
+
+    <div class="container text-center mt-5">
+        <h1 class="h1">Admin Panel</h1>
+    </div>
+
+    <div class="container mt-5 mb-5">
+        <div class="row mb-3">
+            <div class="col-md-4 mb-2">
+                <a href="/admin/add_model" class="text-decoration-none">
+                    <div class="card p-3 text-dark">
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-square-plus fa-2x mb-2"></i>
+                            <h5 class="card-title">Add Model</h5>
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-2">
+                <a href="/admin/view_models" class="text-decoration-none">
+                    <div class="card p-3 text-dark">
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-arrow-up-right-from-square fa-2x mb-2"></i>
+                            <h5 class="card-title">View Models</h5>
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/admin/add_category" class="text-decoration-none">
+                    <div class="card p-3 text-dark">
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-list-check fa-2x mb-2"></i>
+                            <h5 class="card-title">Add Category</h5>
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4 mb-2">
+                <a href="/admin/orders" class="text-decoration-none">
+                    <div class="card p-3 text-dark">
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-table-list fa-2x mb-2"></i>
+                            <h5 class="card-title">Orders</h5>
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-2">
+                <a href="/admin/users" class="text-decoration-none">
+                    <div class="card p-3 text-dark">
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-users fa-2x mb-2"></i>
+                            <h5 class="card-title">Users</h5>
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4    ">
+                <a href="/admin/add-admin" class="text-decoration-none">
+                    <div class="card p-3 text-dark">
+                        <div class="card-body text-center">
+                            <i class="fa-solid fa-user-tie fa-2x mb-2"></i>
+                            <h5 class="card-title">Admins</h5>
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <p class="text-primary fs-5">Admin</p>
+                <ul>
+                    <li>Can log in, manage all users, add/update/remove categories & models.</li>
+                    <li>Can manage users.</li>
+                    <li>Has the highest privileges.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <p class="text-secondary fs-5">User</p>
+                <ul>
+                    <li>Can log in, view their own profile, and purchase models.</li>
+                    <li>Cannot manage other users or access admin panel.</li>
+                    <li>Cannot add/update/remove categories & models.</li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+</body>
+</html>

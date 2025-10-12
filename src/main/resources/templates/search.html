@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Searches</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Search -->
+
+    <div class="container-fluid bg-dark mb-2 p-3">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form action="/models/search" method="get">
+                    <div class="input-group">
+                        <input class="form-control" type="search" name="query" required>
+                        <button type="submit" class="btn btn-light ms-3 col-md-2"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="container-fluid mt-3">
+        <a href="/"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+
+    <div class="container-fluid p-5">
+        <div class="row">
+
+            <!-- Left Panel -->
+
+            <div class="col-md-12 col-lg-2 mb-3">
+                <p class="text-center h5">Category</p>
+                <div class="list-group">
+                    <a href="/models" class="list-group-item list-group-item-action"
+                       th:classappend="${activeCategory == '' ? 'active' : ''}" aria-current="true">
+                        All
+                    </a>
+                    <a th:each="category: ${categories}" th:href="@{'/models?category=' + ${category.name}}"
+                       class="list-group-item list-group-item-action"
+                       th:classappend="${activeCategory == category.name ? 'active' : ''}">[[${category.getName()}]]</a>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+
+            <div class="col-md-12 col-lg-10">
+                <div class="card">
+                    <div class="card-body text-center">
+
+                        <div class="mb-3">
+                            <h3>Models</h3>
+                        </div>
+
+                        <!-- Models -->
+                        <div class="row">
+
+                            <th:block th:if="${assetsSize > 0}">
+                                <div class="col-md-4 col-lg-3" th:each="model : ${assets}">
+                                    <div class="card p-3 mb-5 border shadow-sm">
+                                        <img class="img-fluid" th:src="${model.imageName}" width="100%" height="100px" th:alt="${model.title}">
+                                        <p class="text-center">[[${model.title}]]</p>
+                                        <div class="row text-center fw-bold">
+                                            <p>₹[[${model.price}]]</p>
+                                            <a class="btn btn-dark col-md-6 offset-md-3" th:href="@{'/models/'+${model.id}}">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+
+                            <th:block th:unless="${assetsSize > 0}">
+                                <h5 class="h5 text-center mt-5">No Model available</h5>
+                            </th:block>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+
+                <div class="row mt-3">
+                    <div class="col-md-4">Total Models: [[${totalElements}]]</div>
+                    <div class="col-md-8">
+                        <th:block th:if="${assetsSize > 0}">
+                            <nav>
+                                <ul class="pagination">
+
+                                    <li class="page-item">
+                                        <a class="page-link" th:href="@{'/models?page=' + ${pageNumber-1}}"
+                                           th:classappend="${isFirst} ? 'disabled' : '' ">Previous</a>
+                                    </li>
+
+                                    <li th:each="i: ${#numbers.sequence(1, totalPages)}" class="page-item"
+                                        th:classappend="${pageNumber+1==i ? 'active' : ''}">
+                                        <a class="page-link" th:href="@{'/models?page=' + ${i-1}}">[[${i}]]</a>
+                                    </li>
+
+                                    <li class="page-item">
+                                        <a class="page-link" th:href="@{'/models?page=' + ${pageNumber+1}}"
+                                           th:classappend="${isLast} ? 'disabled' : '' ">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

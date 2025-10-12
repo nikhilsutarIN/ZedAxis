@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Edit Model Card -->
+
+    <div class="container-fluid mt-3">
+        <a href="/admin/view_models"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+
+    <div class="container mt-3 mb-5">
+        <div class="row">
+            <div class="col-md-12 col-lg-8 offset-lg-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-center">Edit Model</h3>
+
+                        <!-- Session Message -->
+
+                        <th:block th:if="${session.message}">
+                            <div class="alert alert-success text-center" role="alert">[[${session.message}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                        <th:block th:if="${session.error}">
+                            <div class="alert alert-danger text-center" role="alert">[[${session.error}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/updateModel" method="post" enctype="multipart/form-data">
+                            <div class="form-group mb-2">
+                                <label for="model_title">Model Title</label>
+                                <input type="hidden" name="id" th:value="${assets.id}">
+                                <input class="form-control" type="text" name="title" id="model_title" th:value="${assets.title}" required>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="active" value="true" id="flexRadioDefault1" th:checked="${assets.active==true}">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="radio" name="active" value="false" id="flexRadioDefault2" th:checked="${assets.active==false}">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Inactive
+                                </label>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="model_description">Model Description</label>
+                                <textarea class="form-control" name="description" id="model_description" th:text="${assets.description}" required></textarea>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="model_type">Model Type</label>
+                                <select class="form-control" name="category" id="model_type" required>
+                                    <option value="">Select Model Type</option>
+                                    <option th:each="category: ${categories}" th:value="${category.name}">[[${category.name}]]</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="model_price">Model Price (INR)</label>
+                                <input class="form-control" type="number" name="price" id="model_price" th:value="${assets.price}" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="model_image">Model Image (Resolution: 512 x 512)</label>
+                                <input class="form-control" type="file" name="file1" id="model_image">
+                            </div>
+                            <p>Existing Image: </p><img th:src="${assets.imageName}" width="100px" height="100px">
+                            <div class="form-group mb-3">
+                                <label for="model_file">Model File (.fbx .blend)</label>
+                                <input class="form-control" type="file" name="file2" id="model_file">
+                            </div>
+                            <p>Existing File: [[${assets.fileName}]]</p>
+                            <button type="submit" class="form-control btn btn-dark">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

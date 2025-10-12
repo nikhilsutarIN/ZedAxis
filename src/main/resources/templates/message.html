@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Message</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Message card -->
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 col-lg-6 offset-md-2 offset-lg-3 mt-5">
+                <div class="card p-5 shadow">
+                    <div class="card-body text-center">
+
+                        <!-- Show Password Reset Message -->
+                        <th:block th:if="${message}">
+                            <i class="fa-solid fa-circle-check text-success h1"></i>
+
+                            <p th:text="${message}"></p>
+                        </th:block>
+
+                        <!-- Show Error Message -->
+                        <th:block th:if="${error}">
+                            <i class="fa-solid fa-circle-xmark text-danger h1"></i>
+                            <p th:text="${error}"></p>
+                        </th:block>
+
+                        <a class="btn btn-secondary" href="/">Return to Home Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

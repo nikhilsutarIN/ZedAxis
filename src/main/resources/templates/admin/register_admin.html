@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Admin</title>
+</head>
+<body>
+
+<section>
+
+    <!-- Register Admin -->
+
+    <div class="container-fluid mt-3">
+        <a href="/admin/add-admin"><i class="fa-solid fa-arrow-left"></i> Back</a><br><br>
+    </div>
+
+    <div class="container-fluid mt-3 mb-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3 class="card-title">Register Admin</h3>
+
+                        <!-- Session Message -->
+
+                        <th:block th:if="${session.message}">
+                            <div class="alert alert-success" role="alert">[[${session.message}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                            <!-- Bean name should start in lowercase -->
+                        </th:block>
+
+                        <th:block th:if="${session.error}">
+                            <div class="alert alert-danger" role="alert">[[${session.error}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="/admin/add-admin/register-admin" method="post" id="registerForm">
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label for="name">Full Name</label>
+                                    <input class="form-control" type="text" name="name" id="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="mobile">Mobile Number</label>
+                                    <input class="form-control" type="tel" name="mobile" id="mobile" pattern="[0-9]{10}" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="email">Email</label>
+                                <input class="form-control" type="email" name="email" id="email" required>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label for="address">Address</label>
+                                    <input class="form-control" type="text" name="address" id="address" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email">City</label>
+                                    <input class="form-control" type="text" name="city" id="city" required>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label for="state">State</label>
+                                    <select class="form-select" name="state" id="state" required>
+                                        <option value="" selected disabled>-- Select State --</option>
+                                        <option th:each="state : ${states}" th:value="${state.key}" th:text="${state.value}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="pincode">Pincode</label>
+                                    <input class="form-control" type="number" name="pincode" id="pincode" minlength="6" maxlength="6" required>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <label for="password">Enter Password</label>
+                                    <input class="form-control" type="password" name="password" id="password" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <input class="form-control" type="password" name="confirm_password" id="confirm_password" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-2">
+                                <input class="form-control btn btn-dark" type="submit" value="Register Admin">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

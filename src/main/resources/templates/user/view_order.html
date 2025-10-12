@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>View Orders</title>
+</head>
+<body>
+
+<section>
+
+    <!-- View User Orders -->
+
+    <div class="container-fluid mt-3">
+        <a href="/"><i class="fa-solid fa-arrow-left"></i> Back</a>
+    </div>
+
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3 class="card-title">Orders</h3>
+
+                        <!-- Session Message -->
+
+                        <th:block th:if="${session.message}">
+                            <div class="alert alert-success text-center" role="alert">[[${session.message}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                        <th:block th:if="${session.error}">
+                            <div class="alert alert-danger text-center" role="alert">[[${session.error}]]</div>
+                            <th:block th:text="${@commonService.removeSessionMessage()}"></th:block>
+                        </th:block>
+
+                    </div>
+
+                    <!-- Table -->
+
+                    <div class="card-body table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Model</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Payment Type</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr th:each="order: ${orderList}">
+                                <td>[[${order.orderId}]]</td>
+                                <td>[[${order.orderDate}]]</td>
+                                <td><a th:href="@{'/models/' + ${order.asset.id}}">[[${order.asset.title}]]</a></td>
+                                <td>₹ [[${order.price}]]</td>
+                                <td>[[${order.status}]]</td>
+                                <td>[[${order.paymentType}]]</td>
+                                <td><a th:href="@{'/user/orderCancel/' + ${order.id}}" class="btn btn-danger" th:classappend="${order.status == 'In progress' ? '' : 'disabled'}">Cancel</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+</body>
+</html>

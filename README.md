@@ -58,7 +58,7 @@ Click available action to perform an action
 
 ### Backend
 - Spring Boot
-- Spring Security for authentication/autorization
+- Spring Security for authentication/authorization
 - MySQL
 - AWS S3
 

@@ -65,5 +65,5 @@ Click available action to perform an action
 ### Dev Tools
 - Git and Github
 - VS Code, Intellij 
-- AWS Elastic Beanstalk
+- Deployed on AWS Elastic Beanstalk
 - Images are used for demo purpose only

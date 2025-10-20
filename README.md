@@ -1,7 +1,7 @@
 ![ZedAxis](github-images/zedaxis.png)
 # ZedAxis - ECommerce Platform
 
-View it live:
+View live demo:
 [ZedAxis](http://zedaxis.ap-south-1.elasticbeanstalk.com)
 
 This Webapp allows users to buy items, add items to cart, remove items from cart, and download the items after purchase.
@@ -53,17 +53,17 @@ Click available action to perform an action
 ### Frontend
 - HTML
 - CSS
-- Thymeleaf
 - Bootstrap
+- Thymeleaf (for server-side rendering)
 
 ### Backend
 - Spring Boot
-- Spring Security for authentication/authorization
-- MySQL
-- AWS S3
+- MySQL 
+- AWS S3 (for file storage)
 
 ### Dev Tools
-- Git and Github
-- VS Code, Intellij 
+- Git and GitHub
+- Intellij IDEA, Visual Studio Code
 - Deployed on AWS Elastic Beanstalk
-- Images are used for demo purpose only
+- Database hosted on Amazon RDS
+- Images are used for demonstration purpose only

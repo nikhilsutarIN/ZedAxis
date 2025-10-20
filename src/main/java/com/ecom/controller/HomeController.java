@@ -297,7 +297,7 @@ public class HomeController {
     @GetMapping("/models/search")
     public String search(@RequestParam String query, Model model,
                          @RequestParam(name = "page", defaultValue = "0") Integer pageNumber,
-                         @RequestParam(name = "pageSize", defaultValue = "4") Integer pageSize) {
+                         @RequestParam(name = "pageSize", defaultValue = "24") Integer pageSize) {
 
         List<Category> activeCategories = categoryService.getAllActiveCategories();
         model.addAttribute("categories", activeCategories);

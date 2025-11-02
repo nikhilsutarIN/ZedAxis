@@ -65,5 +65,5 @@ Click available action to perform an action
 - Git and GitHub
 - Intellij IDEA, Visual Studio Code
 - Deployed on AWS Elastic Beanstalk
-- Database hosted on Amazon RDS
+- Database hosted on Aiven
 - Images are used for demonstration purpose only

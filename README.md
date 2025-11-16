@@ -2,7 +2,7 @@
 # ZedAxis - ECommerce Platform
 
 View live demo:
-[ZedAxis](http://zedaxis.ap-south-1.elasticbeanstalk.com)
+[ZedAxis](https://zedaxis.onrender.com/)
 
 This Webapp allows users to buy items, add items to cart, remove items from cart, and download the items after purchase.
 Admins can create listings, edit listings, manage orders, manage users, and manage admins.

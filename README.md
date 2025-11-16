@@ -64,6 +64,8 @@ Click available action to perform an action
 ### Dev Tools
 - Git and GitHub
 - Intellij IDEA, Visual Studio Code
-- Deployed on AWS Elastic Beanstalk
+- ~~Deployed on AWS Elastic Beanstalk~~
+- Deployed on Render
+- ~~Database hosted on AWS RDS~~
 - Database hosted on Aiven
 - Images are used for demonstration purpose only
